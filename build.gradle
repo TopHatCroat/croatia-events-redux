@@ -1,0 +1,47 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+        classpath 'com.google.gms:google-services:3.0.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    SUPPORT_LIB_VERSION = "26.0.0"
+    DAGGER_VERSION = '2.9'
+    RXJAVA_VERSION = '2.1.0'
+    RXANDROID_VERSION = '2.0.1'
+    GUAVA_VERSION = '22.0-android'
+    RETROFIT_VERSION = '2.3.0'
+    OKHTTP_VERSION = '3.6.0'
+    DAGGER_VERSION = '2.9'
+    TIMBER_VERSION = '4.5.1'
+    GSON_VERSION = '2.7'
+    AUTOFACTORY_VERSION = "1.0-beta5"
+    CALENDAR_VERSION = "1.4.3"
+    PLAY_VERSION = "11.0.2"
+    COMPONENTS_VERSION = "1.0.0-alpha5"
+    CONSTRAINT_VERSION = "1.0.2"
+
+    PLAY_VERSION_INT = "11020000"
+}
