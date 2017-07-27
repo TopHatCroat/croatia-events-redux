@@ -22,7 +22,6 @@ public class EventListViewModel extends BaseViewModel implements ListViewModel<E
         super(application);
     }
 
-
     @Override
     public ObservableField<List<Event>> getItems() {
         return items;
