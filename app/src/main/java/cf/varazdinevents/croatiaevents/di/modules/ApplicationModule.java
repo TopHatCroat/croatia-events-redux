@@ -1,4 +1,4 @@
-package cf.varazdinevents.croatiaevents.di;
+package cf.varazdinevents.croatiaevents.di.modules;
 
 import javax.inject.Singleton;
 
@@ -23,11 +23,4 @@ public class ApplicationModule {
     MainApplication provideApplication() {
         return application;
     }
-
-    @Provides
-    @Singleton
-    SharedPrefs provideSharedPrefs() {
-        return new SharedPrefs(application);
-    }
-
 }

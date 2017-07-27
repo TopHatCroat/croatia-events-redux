@@ -8,7 +8,7 @@ import java.util.List;
 import cf.varazdinevents.croatiaevents.base.BaseViewModel;
 import cf.varazdinevents.croatiaevents.base.ui.list.ListListener;
 import cf.varazdinevents.croatiaevents.base.ui.list.ListViewModel;
-import cf.varazdinevents.croatiaevents.model.Event;
+import cf.varazdinevents.croatiaevents.data.model.Event;
 
 /**
  * Created by antonio on 26/07/17.

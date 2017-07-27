@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import cf.varazdinevents.croatiaevents.di.ApplicationComponent;
-import cf.varazdinevents.croatiaevents.di.ApplicationModule;
+import cf.varazdinevents.croatiaevents.di.modules.ApplicationModule;
 import cf.varazdinevents.croatiaevents.di.DaggerApplicationComponent;
-import cf.varazdinevents.croatiaevents.di.NetworkModule;
+import cf.varazdinevents.croatiaevents.di.modules.NetworkModule;
 import timber.log.Timber;
 
 /**

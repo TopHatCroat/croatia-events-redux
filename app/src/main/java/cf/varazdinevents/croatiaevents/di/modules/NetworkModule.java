@@ -1,11 +1,11 @@
-package cf.varazdinevents.croatiaevents.di;
+package cf.varazdinevents.croatiaevents.di.modules;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import cf.varazdinevents.croatiaevents.MainApplication;
-import cf.varazdinevents.croatiaevents.api.RestService;
+import cf.varazdinevents.croatiaevents.data.api.RestService;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;

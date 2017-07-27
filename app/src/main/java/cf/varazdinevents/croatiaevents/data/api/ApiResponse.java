@@ -1,4 +1,4 @@
-package cf.varazdinevents.croatiaevents.api;
+package cf.varazdinevents.croatiaevents.data.api;
 
 import android.support.annotation.Nullable;
 
