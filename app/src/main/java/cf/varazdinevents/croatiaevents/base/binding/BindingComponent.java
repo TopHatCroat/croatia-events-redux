@@ -18,4 +18,9 @@ public class BindingComponent implements DataBindingComponent {
     public FragmentBindings getFragmentBindings() {
         return fragmentBindings;
     }
+
+    @Override
+    public BindingAdapters getBindingAdapters() {
+        return new BindingAdapters();
+    }
 }
