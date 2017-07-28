@@ -10,9 +10,9 @@ public class EventResponse {
     public Integer id;
     public String title;
     public String text;
-    public Integer date;
+    public Long date;
     @SerializedName("date_to")
-    public Integer dateTo;
+    public Long dateTo;
     public String host;
     @SerializedName("official_link")
     public String officialLink;

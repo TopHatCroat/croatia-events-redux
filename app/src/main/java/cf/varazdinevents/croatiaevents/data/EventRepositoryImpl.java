@@ -6,8 +6,10 @@ import cf.varazdinevents.croatiaevents.base.utils.Schedule;
 import cf.varazdinevents.croatiaevents.base.utils.SharedPrefs;
 import cf.varazdinevents.croatiaevents.data.api.RestService;
 import cf.varazdinevents.croatiaevents.data.db.EventDao;
+import cf.varazdinevents.croatiaevents.data.db.EventEntity;
 import cf.varazdinevents.croatiaevents.data.mapper.EventMapper;
 import cf.varazdinevents.croatiaevents.data.model.Event;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
@@ -28,15 +30,27 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public Single<List<Event>> getEvents() {
+    public Flowable<List<Event>> getEvents() {
+        return Single
+                .merge(fromDb(), fromApi())
+                .subscribeOn(Schedule.io());
+    }
+
+    private Single<List<Event>> fromApi() {
         return service
                 .getEventsByCity(DEFAULT_CITY_ID)
-                .flatMap(response -> {
-//                    if (!response.isSuccessful())
-//                        return Single.error(new Exception(response.errorMessage));
-//                    return Single.just(EventMapper.map(response.body));
-                    return Single.just(EventMapper.map(response));
+                .map(EventMapper::fromResponse)
+                .doOnSuccess(eventEntities -> {
+                    for(EventEntity ee : eventEntities) {
+                        if(eventDao.count(ee.apiId) == 0) eventDao.insert(ee);
+                    }
                 })
-                .subscribeOn(Schedule.io());
+                .map(EventMapper::fromEntity);
+    }
+
+    private Single<List<Event>> fromDb() {
+        return eventDao
+                .getAllEvents()
+                .map(EventMapper::fromEntity);
     }
 }

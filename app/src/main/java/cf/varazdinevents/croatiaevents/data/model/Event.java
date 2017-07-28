@@ -8,7 +8,7 @@ import cf.varazdinevents.croatiaevents.base.ui.list.Listable;
  * Created by antonio on 26/07/17.
  */
 
-public class Event implements Listable {
+public class Event implements Listable<Integer> {
     private Integer apiId;
     private String title;
     private String text;
@@ -119,7 +119,7 @@ public class Event implements Listable {
     }
 
     @Override
-    public Object getId() {
+    public Integer getId() {
         return apiId;
     }
 }

@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "events")
 public class EventEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo(name = "api_id")
     public int apiId;
@@ -34,4 +34,28 @@ public class EventEntity {
     public String address;
     @ColumnInfo(name = "festival_id")
     public int festivalId;
+
+    public EventEntity(int id, int apiId, String title, String text, long date,
+                       long dateTo, String host, String officialLink, String image, String facebook,
+                       String offers, String category, int dateUpdated, int hostApiId, double longitude,
+                       double latitude, String address, int festivalId) {
+        this.id = id;
+        this.apiId = apiId;
+        this.title = title;
+        this.text = text;
+        this.date = date;
+        this.dateTo = dateTo;
+        this.host = host;
+        this.officialLink = officialLink;
+        this.image = image;
+        this.facebook = facebook;
+        this.offers = offers;
+        this.category = category;
+        this.dateUpdated = dateUpdated;
+        this.hostApiId = hostApiId;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.address = address;
+        this.festivalId = festivalId;
+    }
 }
