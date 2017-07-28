@@ -39,7 +39,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRestAdapter(MainApplication mainApplication, OkHttpClient okHttpClient) {
+    public Retrofit provideRestAdapter(OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient).baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

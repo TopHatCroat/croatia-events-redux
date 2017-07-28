@@ -12,7 +12,7 @@ import dagger.Subcomponent;
         ActivityModule.class,
 })
 @ActivityScope
-public interface ActivityComponent {
+public interface ActivityComponent extends ApplicationComponent.Exposes {
 
     FragmentComponent plus(FragmentModule fragmentModule);
 

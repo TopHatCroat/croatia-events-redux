@@ -1,17 +1,19 @@
 package cf.varazdinevents.croatiaevents.data.model;
 
-import android.arch.persistence.room.Entity;
+import java.util.Date;
+
+import cf.varazdinevents.croatiaevents.base.ui.list.Listable;
 
 /**
  * Created by antonio on 26/07/17.
  */
 
-public class Event {
+public class Event implements Listable {
     private Integer apiId;
     private String title;
     private String text;
-    private Long date;
-    private Long dateTo;
+    private Date date;
+    private Date dateTo;
     private String host;
     private String officialLink;
     private String image;
@@ -25,7 +27,7 @@ public class Event {
     private String address;
     private Integer festivalId;
 
-    public Event(Integer apiId, String title, String text, Long date, Long dateTo, String host,
+    public Event(Integer apiId, String title, String text, Date date, Date dateTo, String host,
                  String officialLink, String image, String facebook, String offers, String category,
                  Integer dateUpdated, Integer hostApiId, Double longitude, Double latitude,
                  String address, Integer festivalId) {
@@ -60,11 +62,11 @@ public class Event {
         return text;
     }
 
-    public Long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public Long getDateTo() {
+    public Date getDateTo() {
         return dateTo;
     }
 
@@ -114,5 +116,10 @@ public class Event {
 
     public Integer getFestivalId() {
         return festivalId;
+    }
+
+    @Override
+    public Object getId() {
+        return apiId;
     }
 }

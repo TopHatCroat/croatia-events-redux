@@ -1,7 +1,5 @@
 package cf.varazdinevents.croatiaevents.data.api;
 
-import java.util.List;
-
 import cf.varazdinevents.croatiaevents.data.api.responses.EventResponse;
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -13,5 +11,5 @@ import retrofit2.http.Path;
 
 public interface RestService {
     @GET("events/city/{cityId}")
-    Single<ApiResponse<List<EventResponse>>> getEventsByCity(@Path("cityId") Integer cityId);
+    Single<EventResponse[]> getEventsByCity(@Path("cityId") Integer cityId);
 }

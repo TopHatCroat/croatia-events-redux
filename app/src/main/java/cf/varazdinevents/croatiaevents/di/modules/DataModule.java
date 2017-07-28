@@ -6,7 +6,9 @@ import android.content.Context;
 import javax.inject.Singleton;
 
 import cf.varazdinevents.croatiaevents.base.utils.SharedPrefs;
+import cf.varazdinevents.croatiaevents.data.db.EventDao;
 import cf.varazdinevents.croatiaevents.data.db.EventsDatabase;
+import cf.varazdinevents.croatiaevents.di.ForApplication;
 import dagger.Module;
 import dagger.Provides;
 
@@ -18,13 +20,19 @@ import dagger.Provides;
 public class DataModule {
     @Provides
     @Singleton
-    SharedPrefs provideSharedPrefs(Context context) {
+    SharedPrefs provideSharedPrefs(@ForApplication Context context) {
         return new SharedPrefs(context);
     }
 
     @Provides
     @Singleton
-    EventsDatabase eventsDatabase(Context context) {
+    EventsDatabase eventsDatabase(@ForApplication Context context) {
         return Room.databaseBuilder(context, EventsDatabase.class, "db").build();
+    }
+
+    @Provides
+    @Singleton
+    EventDao eventDao(EventsDatabase db) {
+        return db.eventDao();
     }
 }
