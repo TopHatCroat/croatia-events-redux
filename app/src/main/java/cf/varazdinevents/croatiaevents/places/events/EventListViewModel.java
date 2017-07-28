@@ -1,10 +1,11 @@
-package cf.varazdinevents.croatiaevents.components.events;
+package cf.varazdinevents.croatiaevents.places.events;
 
 import android.app.Application;
 import android.databinding.ObservableField;
 
 import java.util.List;
 
+import cf.varazdinevents.croatiaevents.MainApplication;
 import cf.varazdinevents.croatiaevents.base.BaseViewModel;
 import cf.varazdinevents.croatiaevents.base.ui.list.ListListener;
 import cf.varazdinevents.croatiaevents.base.ui.list.ListViewModel;
@@ -20,6 +21,7 @@ public class EventListViewModel extends BaseViewModel implements ListViewModel<E
 
     protected EventListViewModel(Application application) {
         super(application);
+        MainApplication.get(application).getAppComponent().inject(this);
     }
 
     @Override

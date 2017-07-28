@@ -2,11 +2,11 @@ package cf.varazdinevents.croatiaevents.di;
 
 import javax.inject.Singleton;
 
+import cf.varazdinevents.croatiaevents.di.modules.ActivityModule;
 import cf.varazdinevents.croatiaevents.di.modules.ApplicationModule;
 import cf.varazdinevents.croatiaevents.di.modules.DataModule;
 import cf.varazdinevents.croatiaevents.di.modules.NetworkModule;
-import cf.varazdinevents.croatiaevents.places.events.ActivityComponent;
-import cf.varazdinevents.croatiaevents.places.events.ActivityModule;
+import cf.varazdinevents.croatiaevents.places.events.EventListViewModel;
 import dagger.Component;
 
 /**
@@ -21,4 +21,6 @@ import dagger.Component;
 })
 public interface ApplicationComponent {
     ActivityComponent plus(ActivityModule activityModule);
+
+    void inject(EventListViewModel eventListViewModel);
 }

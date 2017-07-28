@@ -4,16 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 import cf.varazdinevents.croatiaevents.di.ApplicationComponent;
-import cf.varazdinevents.croatiaevents.di.modules.ApplicationModule;
-import cf.varazdinevents.croatiaevents.di.DaggerApplicationComponent;
-import cf.varazdinevents.croatiaevents.di.modules.NetworkModule;
+import cf.varazdinevents.croatiaevents.di.ComponentCreator;
 import timber.log.Timber;
 
 /**
  * Created by antonio on 25/07/17.
  */
 
-public class MainApplication extends Application {
+public final class MainApplication extends Application {
 
     private ApplicationComponent applicationComponent;
 
@@ -42,14 +40,7 @@ public class MainApplication extends Application {
 //        }
 
 
-        initializeInjection();
-    }
-
-    private void initializeInjection() {
-        applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .networkModule(new NetworkModule())
-                .build();
+        applicationComponent = ComponentCreator.create(this);
     }
 
     @Override

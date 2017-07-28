@@ -1,9 +1,11 @@
 package cf.varazdinevents.croatiaevents.di.modules;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import cf.varazdinevents.croatiaevents.MainApplication;
-import cf.varazdinevents.croatiaevents.base.utils.SharedPrefs;
+import cf.varazdinevents.croatiaevents.di.ForApplication;
 import dagger.Module;
 import dagger.Provides;
 
@@ -20,7 +22,16 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    MainApplication provideApplication() {
+    @ForApplication
+    MainApplication application() {
         return application;
     }
+
+    @Provides
+    @Singleton
+    @ForApplication
+    Context context() {
+        return application.getApplicationContext();
+    }
+
 }

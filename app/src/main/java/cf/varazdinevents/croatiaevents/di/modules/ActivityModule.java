@@ -1,4 +1,4 @@
-package cf.varazdinevents.croatiaevents.places.events;
+package cf.varazdinevents.croatiaevents.di.modules;
 
 import cf.varazdinevents.croatiaevents.base.BaseActivity;
 import dagger.Module;
@@ -15,4 +15,5 @@ public class ActivityModule {
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
     }
+
 }
