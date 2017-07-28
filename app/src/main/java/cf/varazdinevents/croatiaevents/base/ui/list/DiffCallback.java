@@ -11,10 +11,12 @@ import timber.log.Timber;
  */
 
 public class DiffCallback<T extends Listable> extends DiffUtil.Callback {
+    private final SimpleListAdapter adapter;
     private List<T> old;
     private List<T> current;
 
-    public DiffCallback(List<T> old, List<T> current) {
+    public DiffCallback(SimpleListAdapter adapter, List<T> old, List<T> current) {
+        this.adapter = adapter;
         this.old = old;
         this.current = current;
     }
@@ -31,12 +33,11 @@ public class DiffCallback<T extends Listable> extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        Timber.d("calculating on: " + Thread.currentThread().getName());
-        return old.get(oldItemPosition).getId().equals(current.get(newItemPosition).getId());
+        return this.adapter.areItemsTheSame(old.get(oldItemPosition), current.get(newItemPosition));
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return old.get(oldItemPosition).equals(current.get(newItemPosition));
+        return this.adapter.areContentsTheSame(old.get(oldItemPosition), current.get(newItemPosition));
     }
 }

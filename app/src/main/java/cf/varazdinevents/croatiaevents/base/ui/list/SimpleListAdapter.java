@@ -51,7 +51,7 @@ public abstract class SimpleListAdapter<T extends Listable, B extends ViewDataBi
         } else {
             final int oldVerson = dataVersion;
             final List<T> oldItems = items;
-            Flowable.just(new DiffCallback<>(oldItems, newItems))
+            Flowable.just(new DiffCallback<>(this, oldItems, newItems))
                     .map(callback -> DiffUtil.calculateDiff(callback, detectMoves()))
                     .subscribeOn(Schedule.compute())
                     .observeOn(Schedule.ui())
@@ -76,4 +76,8 @@ public abstract class SimpleListAdapter<T extends Listable, B extends ViewDataBi
     public int getItemCount() {
         return items.size();
     }
+
+    public abstract boolean areItemsTheSame(T old, T current);
+
+    public abstract boolean areContentsTheSame(T old, T current);
 }

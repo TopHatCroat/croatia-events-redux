@@ -37,4 +37,14 @@ class EventsAdapter extends SimpleListAdapter<Event, EventItemBinding> {
     protected void bind(EventItemBinding binding, Event item) {
         binding.setItem(item);
     }
+
+    @Override
+    public boolean areItemsTheSame(Event old, Event current) {
+        return old.getApiId().equals(current.getApiId());
+    }
+
+    @Override
+    public boolean areContentsTheSame(Event old, Event current) {
+        return old.getDateUpdated().equals(current.getDateUpdated());
+    }
 }
