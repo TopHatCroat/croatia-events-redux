@@ -41,6 +41,7 @@ dependencies {
     compile "com.google.guava:guava:$rootProject.ext.GUAVA_VERSION"
     compile "com.google.dagger:dagger:$rootProject.ext.DAGGER_VERSION"
     compile "com.jakewharton.timber:timber:$rootProject.ext.TIMBER_VERSION"
+    compile "com.annimon:stream:$rootProject.ext.STREAM_VERSION"
 
     compile "com.google.code.gson:gson:$rootProject.ext.GSON_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.RETROFIT_VERSION"

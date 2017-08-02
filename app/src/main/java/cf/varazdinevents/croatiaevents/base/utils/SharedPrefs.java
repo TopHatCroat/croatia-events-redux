@@ -23,7 +23,7 @@ public class SharedPrefs {
      * @param defValue default expected value
      * @return shared preference value, or {@code defValue} if not found
      */
-    public static String read(String key, String defValue) {
+    public String read(String key, String defValue) {
         return sharedPreferences.getString(key, defValue);
     }
 
@@ -33,7 +33,7 @@ public class SharedPrefs {
      * @param key   preference key for identification
      * @param value value to write
      */
-    public static void write(String key, String value) {
+    public void write(String key, String value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putString(key, value);
         prefsEditor.commit();
@@ -46,7 +46,7 @@ public class SharedPrefs {
      * @param defValue default expected value
      * @return shared preference value, or {@code defValue} if not found
      */
-    public static boolean read(String key, boolean defValue) {
+    public boolean read(String key, boolean defValue) {
         return sharedPreferences.getBoolean(key, defValue);
     }
 
@@ -56,7 +56,7 @@ public class SharedPrefs {
      * @param key   preference key for identification
      * @param value value to write
      */
-    public static void write(String key, boolean value) {
+    public void write(String key, boolean value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putBoolean(key, value);
         prefsEditor.commit();
@@ -69,7 +69,7 @@ public class SharedPrefs {
      * @param defValue default expected value
      * @return shared preference value, or {@code defValue} if not found
      */
-    public static Integer read(String key, int defValue) {
+    public Integer read(String key, int defValue) {
         return sharedPreferences.getInt(key, defValue);
     }
 
@@ -79,7 +79,7 @@ public class SharedPrefs {
      * @param key   preference key for identification
      * @param value value to write
      */
-    public static void write(String key, Integer value) {
+    public void write(String key, Integer value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putInt(key, value).commit();
     }

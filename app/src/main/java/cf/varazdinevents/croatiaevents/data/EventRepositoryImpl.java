@@ -1,12 +1,13 @@
 package cf.varazdinevents.croatiaevents.data;
 
+import com.annimon.stream.Stream;
+
 import java.util.List;
 
 import cf.varazdinevents.croatiaevents.base.utils.Schedule;
 import cf.varazdinevents.croatiaevents.base.utils.SharedPrefs;
 import cf.varazdinevents.croatiaevents.data.api.RestService;
 import cf.varazdinevents.croatiaevents.data.db.EventDao;
-import cf.varazdinevents.croatiaevents.data.db.EventEntity;
 import cf.varazdinevents.croatiaevents.data.mapper.EventMapper;
 import cf.varazdinevents.croatiaevents.data.model.Event;
 import io.reactivex.Flowable;
@@ -40,11 +41,9 @@ public class EventRepositoryImpl implements EventRepository {
         return service
                 .getEventsByCity(DEFAULT_CITY_ID)
                 .map(EventMapper::fromResponse)
-                .doOnSuccess(eventEntities -> {
-                    for(EventEntity ee : eventEntities) {
-                        if(eventDao.count(ee.apiId) == 0) eventDao.insert(ee);
-                    }
-                })
+                .doOnSuccess(eventEntities ->
+                        Stream.of(eventEntities).filter(ee -> eventDao.count(ee.apiId) == 0)
+                                                .forEach(eventDao::insert))
                 .map(EventMapper::fromEntity);
     }
 
