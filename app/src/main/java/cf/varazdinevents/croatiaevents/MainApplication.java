@@ -1,7 +1,7 @@
 package cf.varazdinevents.croatiaevents;
 
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import cf.varazdinevents.croatiaevents.di.ApplicationComponent;
 import cf.varazdinevents.croatiaevents.di.ComponentCreator;
@@ -11,7 +11,7 @@ import timber.log.Timber;
  * Created by antonio on 25/07/17.
  */
 
-public final class MainApplication extends Application {
+public final class MainApplication extends MultiDexApplication {
 
     private ApplicationComponent applicationComponent;
 

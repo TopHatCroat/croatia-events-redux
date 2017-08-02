@@ -38,9 +38,9 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public Single<Event> getEvent(int id) {
+    public Single<Event> getEvent(int apiId) {
         return eventDao
-                .getEventById(id)
+                .getEventByApiId(apiId)
                 .subscribeOn(Schedule.io())
                 .map(EventMapper::fromEntity);
     }

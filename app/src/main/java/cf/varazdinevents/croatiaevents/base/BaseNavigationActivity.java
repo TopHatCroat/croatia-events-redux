@@ -65,8 +65,6 @@ public abstract class BaseNavigationActivity extends BaseActivity {
         return drawerLayout;
     }
 
-    ;
-
     @Override
     protected void onStart() {
         super.onStart();

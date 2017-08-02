@@ -21,6 +21,9 @@ public interface EventDao {
     @Query("SELECT * FROM events where id = :id")
     Single<EventEntity> getEventById(int id);
 
+    @Query("SELECT * FROM events where api_id = :apiId")
+    Single<EventEntity> getEventByApiId(int apiId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(EventEntity entity);
 

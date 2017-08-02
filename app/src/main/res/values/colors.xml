@@ -14,5 +14,7 @@
 
     <color name="light_gray">#f8f8f8</color>
     <color name="less_light_gray">#ebebeb</color>
+    <color name="main_logo_color">#FECC7E</color>
+    <color name="white_transparent">#88FFFFFF</color>
 
 </resources>

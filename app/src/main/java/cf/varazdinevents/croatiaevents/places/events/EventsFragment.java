@@ -5,12 +5,13 @@ import android.databinding.DataBindingComponent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import javax.inject.Inject;
 
 import cf.varazdinevents.croatiaevents.R;
 import cf.varazdinevents.croatiaevents.base.BaseFragment;
@@ -22,7 +23,9 @@ import cf.varazdinevents.croatiaevents.data.model.Event;
 import cf.varazdinevents.croatiaevents.databinding.EventsFragmentBinding;
 import cf.varazdinevents.croatiaevents.di.ComponentCreator;
 import cf.varazdinevents.croatiaevents.di.ComponentResolver;
+import cf.varazdinevents.croatiaevents.di.ForActivity;
 import cf.varazdinevents.croatiaevents.di.FragmentComponent;
+import cf.varazdinevents.croatiaevents.places.Navigator;
 
 /**
  * Created by antonio on 26/07/17.
@@ -30,10 +33,17 @@ import cf.varazdinevents.croatiaevents.di.FragmentComponent;
 
 public class EventsFragment extends BaseFragment implements ListHolder<Event> {
 
+    public static final String TAG = BaseFragment.class.getName();
+    private final EventsAdapter adapter;
     FragmentComponent component;
+    @Inject
+    @ForActivity
+    Navigator navigator;
     private DataBindingComponent fragmentBinding = new BindingComponent(this);
-    private EventsAdapter adapter = new EventsAdapter(fragmentBinding);
 
+    public EventsFragment() {
+        this.adapter = new EventsAdapter(fragmentBinding, event -> navigator.toEventDetails(event.getId()));
+    }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         component.inject(this);
@@ -67,5 +77,10 @@ public class EventsFragment extends BaseFragment implements ListHolder<Event> {
     @Override
     public RecyclerView.LayoutManager createLayoutManger() {
         return new LinearLayoutManager(getContext());
+    }
+
+    public static EventsFragment newInstance() {
+        EventsFragment fragment = new EventsFragment();
+        return fragment;
     }
 }

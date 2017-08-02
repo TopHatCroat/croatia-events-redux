@@ -11,4 +11,6 @@
     <string name="application">Application</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="about_event">About event</string>
+    <string name="event_offers">Offers</string>
 </resources>

@@ -6,4 +6,5 @@
     <dimen name="image_card_size">200dp</dimen>
     <dimen name="card_content_padding">8dp</dimen>
     <dimen name="vertical_card_content_padding">16dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
 </resources>

@@ -18,9 +18,11 @@ import cf.varazdinevents.croatiaevents.databinding.EventItemBinding;
 class EventsAdapter extends SimpleListAdapter<Event, EventItemBinding> {
 
     private final DataBindingComponent component;
+    private final EventItemListener listener;
 
-    EventsAdapter(DataBindingComponent component) {
+    EventsAdapter(DataBindingComponent component, EventItemListener listener) {
         this.component = component;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,6 +38,7 @@ class EventsAdapter extends SimpleListAdapter<Event, EventItemBinding> {
     @Override
     protected void bind(EventItemBinding binding, Event item) {
         binding.setItem(item);
+        binding.setListener(listener);
     }
 
     @Override
