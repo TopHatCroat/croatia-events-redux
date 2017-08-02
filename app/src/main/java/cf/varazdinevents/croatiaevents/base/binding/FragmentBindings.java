@@ -2,15 +2,13 @@ package cf.varazdinevents.croatiaevents.base.binding;
 
 import android.databinding.BindingAdapter;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.ref.WeakReference;
-
-import cf.varazdinevents.croatiaevents.base.ui.list.ListHolder;
-import cf.varazdinevents.croatiaevents.base.ui.list.SimpleListAdapter;
 
 /**
  * Created by antonio on 27/07/17.
@@ -23,11 +21,15 @@ public class FragmentBindings {
         this.fragment = new WeakReference<>(fragment);
     }
 
-    @BindingAdapter("imageUrl")
-    public void imageUrl(ImageView imageView, String url) {
-        Glide
-                .with(fragment.get())
-                .load(url)
-                .into(imageView);
+    @BindingAdapter(value = {"imageUrl", "imageUrlHeader"}, requireAll = false)
+    public void imageUrl(ImageView imageView, String url, boolean header) {
+        RequestBuilder builder = Glide.with(fragment.get())
+                .load(url);
+
+        if (header) {
+            builder.apply(RequestOptions.centerCropTransform());
+        }
+
+        builder.into(imageView);
     }
 }

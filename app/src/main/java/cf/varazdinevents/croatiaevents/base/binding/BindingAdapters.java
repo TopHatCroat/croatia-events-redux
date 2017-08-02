@@ -1,9 +1,13 @@
 package cf.varazdinevents.croatiaevents.base.binding;
 
 import android.databinding.BindingAdapter;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.common.base.Strings;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +15,7 @@ import java.util.List;
 
 import cf.varazdinevents.croatiaevents.base.ui.list.ListHolder;
 import cf.varazdinevents.croatiaevents.base.ui.list.SimpleListAdapter;
+import cf.varazdinevents.croatiaevents.tools.AndroidTools;
 
 /**
  * Created by antonio on 27/07/17.
@@ -29,10 +34,30 @@ public class BindingAdapters {
             adapter.setItems(items);
     }
 
-    @BindingAdapter(value = "dateAsText")
-    public static void dateAsText(TextView textView, Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        textView.setText(sdf.format(date));
+    @BindingAdapter(value = {"dateAsText", "dateFormat"}, requireAll = true)
+    public static void dateAsText(TextView textView, Date date, String format) {
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            textView.setText(sdf.format(date));
+        }
+    }
+
+    @BindingAdapter(value = "htmlText")
+    public static void htmlText(TextView textView, String text) {
+        if (Strings.isNullOrEmpty(text))
+            return;
+
+        Handler handler = new Handler();
+        handler.post(() -> {
+            String result = "";
+            if (AndroidTools.is24()) {
+                result = Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY).toString();
+            } else {
+                result = String.valueOf(Html.fromHtml(text));
+            }
+
+            textView.setText(result);
+        });
     }
 
     @BindingAdapter("setupRecycler")
