@@ -37,6 +37,14 @@ public class EventRepositoryImpl implements EventRepository {
                 .subscribeOn(Schedule.io());
     }
 
+    @Override
+    public Single<Event> getEvent(int id) {
+        return eventDao
+                .getEventById(id)
+                .subscribeOn(Schedule.io())
+                .map(EventMapper::fromEntity);
+    }
+
     private Single<List<Event>> fromApi() {
         return service
                 .getEventsByCity(DEFAULT_CITY_ID)
