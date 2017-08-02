@@ -10,8 +10,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
+        all {
+            resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+            resValue "integer", "google_play_services_version", rootProject.ext.PLAY_VERSION_INT
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -24,6 +30,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -56,6 +63,7 @@ dependencies {
     compile "android.arch.persistence.room:rxjava2:$rootProject.ext.COMPONENTS_VERSION"
 
     compile "com.github.bumptech.glide:glide:$rootProject.ext.GLIDE_VERSION"
+    compile "com.google.android.gms:play-services-maps:$rootProject.ext.PLAY_VERSION"
 
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.ext.COMPONENTS_VERSION"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.ext.COMPONENTS_VERSION"
