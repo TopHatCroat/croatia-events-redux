@@ -10,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import cf.varazdinevents.croatiaevents.R;
@@ -65,9 +62,10 @@ public class EventDetailFragment extends BaseFragment {
     private OnMapReadyCallback subscribeMap(EventDetailViewModel viewModel) {
         return googleMap -> {
             viewModel.getLocation().observe(this, latLng -> {
-                if(latLng == null)
+                if (latLng == null)
                     return;
 
+                googleMap.clear();
                 googleMap.addMarker(
                         new MarkerOptions()
                                 .position(latLng)

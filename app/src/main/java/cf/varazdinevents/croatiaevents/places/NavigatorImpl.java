@@ -41,11 +41,12 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public void goBack() {
-        if (fragmentManager.getBackStackEntryCount() == 0) {
+        if (fragmentManager.getBackStackEntryCount() == 1) {
             activity.finish();
         } else {
             fragmentManager.popBackStack();
-        }    }
+        }
+    }
 
     private <T extends BaseFragment> void goToFragment(final String tag, final Creator<T> creator) {
         goToFragment(null, tag, creator);
@@ -57,13 +58,13 @@ public class NavigatorImpl implements Navigator {
 
         if(oldFragment == null && newFragment == null) {
             fragmentManager.beginTransaction()
-//                    .setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right)
+                    .setCustomAnimations(R.anim.enter_up, R.anim.exit_down, R.anim.enter_left, R.anim.exit_right)
                     .addToBackStack(null)
                     .add(R.id.content_holder, creator.create(), newTag)
                     .commit();
         } else if (newFragment == null) {
             fragmentManager.beginTransaction()
-//                    .setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right)
+                    .setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right)
                     .addToBackStack(null)
                     .hide(oldFragment)
                     .add(R.id.content_holder, creator.create(), newTag)

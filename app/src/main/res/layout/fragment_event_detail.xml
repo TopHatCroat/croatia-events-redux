@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="cf.varazdinevents.croatiaevents.places.eventDetail.EventDetailViewModel" />
+
         <variable
             name="event"
             type="cf.varazdinevents.croatiaevents.data.model.Event" />
@@ -21,6 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
+            android:maxHeight="256dp"
+            android:scaleType="centerCrop"
             app:imageUrl="@{event.image}"
             app:imageUrlHeader='@{true}'
             tools:src="@mipmap/logo" />
