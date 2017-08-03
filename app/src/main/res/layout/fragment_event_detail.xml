@@ -14,13 +14,13 @@
             type="cf.varazdinevents.croatiaevents.data.model.Event" />
     </data>
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:gravity="top"
             android:maxHeight="256dp"
             android:scaleType="centerCrop"
@@ -28,14 +28,17 @@
             app:imageUrlHeader='@{true}'
             tools:src="@mipmap/logo" />
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="cf.varazdinevents.croatiaevents.places.eventDetail.OverflowScrollView">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="256dp">
 
                 <include
                     layout="@layout/part_event_general_info"
@@ -55,7 +58,6 @@
 
             </LinearLayout>
 
-
-        </ScrollView>
-    </FrameLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
