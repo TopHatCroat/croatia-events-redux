@@ -3,10 +3,19 @@ package cf.varazdinevents.croatiaevents.places.eventDetail;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import cf.varazdinevents.croatiaevents.R;
 import cf.varazdinevents.croatiaevents.base.BaseFragment;
@@ -46,7 +55,27 @@ public class EventDetailFragment extends BaseFragment {
         binding.setViewModel(viewModel);
         viewModel.getEvent().observe(this, binding::setEvent);
 
+        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        fragment.getMapAsync(subscribeMap(viewModel));
+
         return binding.getRoot();
+    }
+
+    @NonNull
+    private OnMapReadyCallback subscribeMap(EventDetailViewModel viewModel) {
+        return googleMap -> {
+            viewModel.getLocation().observe(this, latLng -> {
+                if(latLng == null)
+                    return;
+
+                googleMap.addMarker(
+                        new MarkerOptions()
+                                .position(latLng)
+                );
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            });
+            googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f));
+        };
     }
 
     @Override

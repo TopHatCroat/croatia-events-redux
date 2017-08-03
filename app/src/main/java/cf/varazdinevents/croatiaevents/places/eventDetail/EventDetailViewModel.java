@@ -5,6 +5,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class EventDetailViewModel extends BaseViewModel {
     public ObservableField<List<Event>> items = new ObservableField<>(new ArrayList<>());
     private MutableLiveData<Event> event = new MutableLiveData<>();
     private int eventId;
+    private MutableLiveData<LatLng> location = new MutableLiveData<>();
 
     public void init(int eventId) {
         this.eventId = eventId;
@@ -37,9 +41,14 @@ public class EventDetailViewModel extends BaseViewModel {
                 repository
                         .getEvent(eventId)
                         .observeOn(Schedule.ui())
-                        .subscribe(event::setValue, Timber::d)
+                        .subscribe(this::update, Timber::d)
         );
 
+    }
+
+    private void update(Event event) {
+        this.event.setValue(event);
+        this.location.setValue(new LatLng(event.getLatitude(), event.getLongitude()));
     }
 
     public EventDetailViewModel(Application application) {
@@ -49,5 +58,9 @@ public class EventDetailViewModel extends BaseViewModel {
 
     public LiveData<Event> getEvent() {
         return event;
+    }
+
+    public LiveData<LatLng> getLocation() {
+        return location;
     }
 }
