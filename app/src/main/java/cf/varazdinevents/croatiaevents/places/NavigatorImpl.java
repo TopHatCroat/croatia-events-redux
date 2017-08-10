@@ -1,6 +1,9 @@
 package cf.varazdinevents.croatiaevents.places;
 
 import android.support.v4.app.FragmentManager;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import cf.varazdinevents.croatiaevents.R;
 import cf.varazdinevents.croatiaevents.base.BaseActivity;

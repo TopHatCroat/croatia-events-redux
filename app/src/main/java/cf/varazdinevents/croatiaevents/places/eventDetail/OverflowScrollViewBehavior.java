@@ -17,17 +17,17 @@ import timber.log.Timber;
  * Created by antonio on 03/08/17.
  */
 
-public class OverflowScrollView extends CoordinatorLayout.Behavior<View> {
+public class OverflowScrollViewBehavior extends CoordinatorLayout.Behavior<View> {
     @Px
     public static final int MAX_OVERFLOW_AMOUNT = 200;
 
     private int overScrollY;
     private boolean isTouching = false;
 
-    public OverflowScrollView() {
+    public OverflowScrollViewBehavior() {
     }
 
-    public OverflowScrollView(Context context, AttributeSet attrs) {
+    public OverflowScrollViewBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

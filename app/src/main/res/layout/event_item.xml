@@ -18,7 +18,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:cardBackgroundColor="@android:color/white"
+        app:cardMaxElevation="@dimen/max_elevation_amount"
         app:cardElevation="@dimen/elevation_amount"
+        app:cardCornerRadius="0dp"
+        app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
         android:onClick="@{() -> listener.onClick(item)}">
 
