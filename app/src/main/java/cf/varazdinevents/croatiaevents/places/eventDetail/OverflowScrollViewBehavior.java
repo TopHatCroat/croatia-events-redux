@@ -1,5 +1,6 @@
 package cf.varazdinevents.croatiaevents.places.eventDetail;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Px;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cf.varazdinevents.croatiaevents.R;
 import timber.log.Timber;
 
 /**
@@ -23,6 +25,8 @@ public class OverflowScrollViewBehavior extends CoordinatorLayout.Behavior<View>
 
     private int overScrollY;
     private boolean isTouching = false;
+    private View targetScaleView;
+    private ZoomScaler scaler;
 
     public OverflowScrollViewBehavior() {
     }
@@ -89,6 +93,7 @@ public class OverflowScrollViewBehavior extends CoordinatorLayout.Behavior<View>
             final View view = group.getChildAt(i);
             view.setTranslationY(overScrollY);
         }
+        scaler.setScale(((float)overScrollY / (float)MAX_OVERFLOW_AMOUNT) + 1f);
     }
 
     private void animateToRest(@NonNull ViewGroup target) {
@@ -98,10 +103,54 @@ public class OverflowScrollViewBehavior extends CoordinatorLayout.Behavior<View>
             final View view = group.getChildAt(i);
             ViewCompat.animate(view).translationY(0).start();
         }
+        scaler.cancelAnimations();
     }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        return true;
+        if (targetScaleView == null) {
+            targetScaleView = parent.findViewById(R.id.scale_target_image);
+            if (targetScaleView != null) {
+                this.scaler = new ZoomScaler(targetScaleView);
+                this.scaler.obtainInitialValues();
+            }
+        }
+        return super.layoutDependsOn(parent, child, dependency);
+    }
+
+    private class ZoomScaler implements Scaler {
+
+        private float scale;
+        private final View target;
+
+        private ZoomScaler(View target) {
+            this.target = target;
+            this.target.setPivotX(target.getWidth() / 2);
+            this.target.setPivotY(target.getHeight() / 2);
+        }
+
+        @Override
+        public float getScale() {
+            return scale;
+        }
+
+        @Override
+        public void setScale(float scale) {
+            this.scale = scale;
+            this.target.setScaleX(scale);
+            this.target.setScaleY(scale);
+        }
+
+        @Override
+        public void cancelAnimations() {
+            ValueAnimator animator = ValueAnimator.ofFloat(getScale(), 1f);
+            animator.addUpdateListener(value -> setScale((Float) value.getAnimatedValue()));
+            animator.start();
+        }
+
+        @Override
+        public void obtainInitialValues() {
+
+        }
     }
 }

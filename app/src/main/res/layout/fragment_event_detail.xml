@@ -18,27 +18,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="top"
-            android:maxHeight="256dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{event.image}"
-            app:imageUrlHeader='@{true}'
-            tools:src="@mipmap/logo" />
+            android:layout_height="300dp">
+
+            <ImageView
+                android:id="@+id/scale_target_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="top"
+                android:maxHeight="256dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{event.image}"
+                app:imageUrlHeader='@{true}'
+                tools:src="@mipmap/logo" />
+
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="cf.varazdinevents.croatiaevents.places.eventDetail.OverflowScrollViewBehavior">
+            android:layout_height="match_parent">
+            <!--app:layout_behavior="cf.varazdinevents.croatiaevents.places.eventDetail.OverflowScrollViewBehavior"-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="256dp">
+                android:layout_marginTop="256dp">
 
                 <include
                     layout="@layout/part_event_general_info"
